@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    /* font-family: 'Anton', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif; */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      background-color: #fd4244;
+      font-family: "Roboto Condensed", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .zegan {
+      background-color: green;
+      width: 400px;
+      height: 400px;
+      border-radius: 100vmax;
+      border: 5px solid white;
+      background: none;
+      margin-top: 80px;
+      position: relative;
+    }
+
+    .zegan .godzinka {
+      --rotacja: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 700;
+      color: white;
+      transform: rotate(var(--rotacja));
+    }
+
+    .zegan .h1 {
+      --rotacja: 30deg;
+    }
+
+    .zegan .h2 {
+      --rotacja: 60deg;
+    }
+
+    .zegan .h3 {
+      --rotacja: 90deg;
+    }
+
+    .zegan .h4 {
+      --rotacja: 120deg;
+    }
+
+    .zegan .h5 {
+      --rotacja: 150deg;
+    }
+
+    .zegan .h6 {
+      --rotacja: 180deg;
+    }
+
+    .zegan .h7 {
+      --rotacja: 210deg;
+    }
+
+    .zegan .h8 {
+      --rotacja: 240deg;
+    }
+
+    .zegan .h9 {
+      --rotacja: 270deg;
+    }
+
+    .zegan .h10 {
+      --rotacja: 300deg;
+    }
+
+    .zegan .h11 {
+      --rotacja: 330deg;
+    }
+
+    .zegan .h12 {
+      --rotacja: 0deg;
+    }
+
+    .zegan .wskazowka {
+      --rotacja: 0;
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      width: 6px;
+      height: 10%;
+      background-color: black;
+      transform-origin: bottom;
+      transform: translateX(-50%) rotate(calc(var(--rotacja) * 1deg));
+      z-index: 10;
+    }
+
+    .zegan .wskazowka.godzina {
+      height: 25%;
+      width: 6px;
+      background-color: white;
+      z-index: 7;
+    }
+
+    .zegan .wskazowka.minuta {
+      height: 35%;
+      width: 5px;
+      background-color: white;
+      z-index: 6;
+    }
+
+    .zegan .wskazowka.sekunda {
+      height: 40%;
+      width: 3px;
+      background-color: black;
+      z-index: 5;
+    }
+
+    .zegan::after {
+      content: "";
+      position: absolute;
+      background-color: white;
+      z-index: 11;
+      width: 20px;
+      height: 20px;
+      border-radius: 100vmax;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    h1 {
+      position: absolute;
+      top: 5px;
+      font-family: "Anton", sans-serif;
+      font-size: 40px;
+    }
+  </style>
+
+  <body>
+    <h1>ANALOG CLOCK</h1>
+    <div class="zegan">
+      <div class="wskazowka godzina" data-wskazowka-godzina></div>
+      <div class="wskazowka minuta" data-wskazowka-minuta></div>
+      <div class="wskazowka sekunda" data-wskazowka-sekunda></div>
+
+      <div class="godzinka h1">I</div>
+      <div class="godzinka h2">I</div>
+      <div class="godzinka h3">I</div>
+      <div class="godzinka h4">I</div>
+      <div class="godzinka h5">I</div>
+      <div class="godzinka h6">I</div>
+      <div class="godzinka h7">I</div>
+      <div class="godzinka h8">I</div>
+      <div class="godzinka h9">I</div>
+      <div class="godzinka h10">I</div>
+      <div class="godzinka h11">I</div>
+      <div class="godzinka h12">I</div>
+    </div>
+  </body>
+  <script>
+    setInterval(zegan, 500);
+
+    const wskazowka_godzina = document.querySelector(
+      "[data-wskazowka-godzina]"
+    );
+    const wskazowka_minuta = document.querySelector("[data-wskazowka-minuta]");
+    const wskazowka_sekunda = document.querySelector(
+      "[data-wskazowka-sekunda]"
+    );
+
+    function zegan() {
+      const czas = new Date();
+      const sekundy = czas.getSeconds() / 60;
+      const minuty = (sekundy + czas.getMinutes()) / 60;
+      const godziny = (minuty + czas.getHours()) / 12;
+      console.log(sekundy);
+      rotacja(wskazowka_godzina, godziny);
+      rotacja(wskazowka_minuta, minuty);
+      rotacja(wskazowka_sekunda, sekundy);
+    }
+
+    function rotacja(element, ratio) {
+      element.style.setProperty("--rotacja", ratio * 360);
+    }
+    zegan();
+  </script>
+</html>

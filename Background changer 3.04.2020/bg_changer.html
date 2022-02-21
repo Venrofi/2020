@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background changer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Condensed:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    /* font-family: 'Anton', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif; */
+
+    * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        background-color: #FD4244;
+        font-family: 'Roboto Condensed', sans-serif;
+        transition: background-color 500ms ease;
+    }
+
+    div {
+        text-align: center;
+        margin-top: 5%;
+
+    }
+
+    h1 {
+        font-family: 'Anton', sans-serif;
+        line-height: 100%;
+        font-size: 60px;
+    }
+
+    button {
+        margin-top: 3%;
+        padding: 10px 40px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 15px;
+    }
+</style>
+
+<body>
+    <div>
+        <h1>BACKGROUND </br> COLOR CHANGER</h1>
+        <button onclick="zmiana()">CHANGE BACKGROUND</button>
+    </div>
+</body>
+<script>
+    function zmiana() {
+        var baton = document.querySelector("button");
+        if (baton.className !== "zmieniony") {
+            document.body.style.backgroundColor = "#426efd";
+            baton.className = "zmieniony";
+        } else {
+            document.body.style.backgroundColor = "#FD4244";
+            baton.className = "";
+        }
+    }
+</script>
+
+</html>

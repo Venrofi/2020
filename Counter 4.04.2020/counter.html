@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Counter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Condensed:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    /* font-family: 'Anton', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif; */
+    * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #FD4244;
+        font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    h1 {
+        font-family: 'Anton', sans-serif;
+        line-height: 100%;
+        font-size: 60px;
+        margin-bottom: 2%;
+    }
+
+    #uno {
+        text-align: center;
+        margin: 5% auto;
+        width: min-content;
+    }
+
+    #duo {
+        margin: 20px auto;
+        padding: 100px 30px;
+        border: 2px solid white
+    }
+
+    p {
+        text-align: center;
+        color: white;
+        margin-top: -90px;
+        font-size: 75px;
+        font-weight: 700;
+    }
+
+    button {
+        background: none;
+        border: 3px solid white;
+        border-radius: 25px;
+        width: 50px;
+        height: 50px;
+        font-family: 'Roboto Condensed', sans-serif;
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #ca2b2b;
+    }
+
+    #minus {
+        float: left;
+        margin-top: 20px;
+    }
+
+    #plus {
+        float: right;
+        margin-top: 20px;
+    }
+</style>
+
+<body>
+    <div id="uno">
+        <h1>COUNTER</h1>
+        <div id="duo">
+            <p>0</p>
+            <button id="minus">-</button>
+            <button id="plus">+</button>
+        </div>
+    </div>
+</body>
+<script>
+    var licznik = 0;
+    document.getElementById("plus").onclick = function () {
+        licznik++;
+        document.querySelector("p").innerHTML = licznik;
+    }
+    document.getElementById("minus").onclick = function () {
+        if (licznik > 0) {
+            licznik--;
+            document.querySelector("p").innerHTML = licznik;
+        }
+
+    }
+</script>
+
+</html>

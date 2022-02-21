@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    /* font-family: 'Anton', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif; */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Roboto Condensed", sans-serif;
+      background-color: #fd4244;
+    }
+
+    h1 {
+      font-family: "Anton", sans-serif;
+      text-align: center;
+      margin-top: 1%;
+      font-size: 60px;
+    }
+
+    .box {
+      width: 46%;
+      border: 5px solid white;
+      margin: 0 auto;
+      overflow: hidden;
+      margin-top: 3%;
+    }
+
+    .obraz {
+      display: flex;
+      height: 600px;
+    }
+
+    .switch {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      bottom: 45%;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+      z-index: 15;
+    }
+
+    .switch.backward {
+      clip-path: polygon(100% 0, 0 50%, 100% 100%);
+      left: 23%;
+    }
+
+    .switch.forward {
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      right: 23%;
+    }
+
+    @media (max-width: 1500px) {
+      .box {
+        width: 60%;
+      }
+
+      .switch.backward {
+        left: 14%;
+      }
+
+      .switch.forward {
+        right: 14%;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .box {
+        width: 80%;
+      }
+
+      .switch.backward {
+        left: 2%;
+      }
+
+      .switch.forward {
+        right: 2%;
+      }
+    }
+  </style>
+
+  <body>
+    <h1>IMAGE SLIDER</h1>
+    <div class="box">
+      <button class="switch forward"></button>
+      <button class="switch backward"></button>
+      <div class="obraz">
+        <img src="3.jpg" id="last" />
+        <img src="1.jpg" id="img_1" />
+        <img src="2.jpg" id="img_2" />
+        <img src="3.jpg" id="img_3" />
+        <img src="1.jpg" id="first" />
+      </div>
+    </div>
+    <script>
+      const obraz = document.querySelector(".obraz");
+      const jpgs = document.querySelectorAll(".obraz img");
+
+      const baton_tyl = document.querySelector(".backward");
+      const baton_przod = document.querySelector(".forward");
+
+      var counter = 1;
+      const size = jpgs[0].clientWidth;
+
+      obraz.style.transform = "translateX(" + -size * counter + "px)";
+
+      console.log("KANTER: " + counter);
+      console.log("SAJZ: " + size);
+      console.log(
+        (obraz.style.transform = "translateX(" + -size * counter + "px)")
+      );
+
+      baton_przod.addEventListener("click", () => {
+        if (counter >= jpgs.length - 1) return;
+        obraz.style.transition = "transform 0.4s ease";
+        counter++;
+        obraz.style.transform = "translateX(" + -size * counter + "px)";
+      });
+
+      baton_tyl.addEventListener("click", () => {
+        if (counter <= 0) return;
+        obraz.style.transition = "transform 0.4s ease";
+        counter--;
+        obraz.style.transform = "translateX(" + -size * counter + "px)";
+      });
+
+      obraz.addEventListener("transitionend", () => {
+        if (jpgs[counter].id === "last") {
+          obraz.style.transition = "none";
+          counter = jpgs.length - 2;
+          obraz.style.transform = "translateX(" + -size * counter + "px)";
+        }
+
+        if (jpgs[counter].id === "first") {
+          obraz.style.transition = "none";
+          counter = jpgs.length - counter;
+          obraz.style.transform = "translateX(" + -size * counter + "px)";
+        }
+      });
+    </script>
+  </body>
+</html>

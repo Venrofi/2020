@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Layouts - Kevin Powell</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="background-heading">
+      <div class="header">
+        <div class="header__content">
+          <h1>Responsive layouts don't have to be a struggle</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+          <a class="learn-more">I WANT TO LEARN</a>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Roboto", sans-serif;
+      font-size: 1.3rem;
+      margin: 0;
+    }
+
+    .background-heading {
+      background-color: #23424a;
+      color: white;
+    }
+
+    .header {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .header__content {
+      width: 60%;
+      padding: 100px 0;
+      max-width: 750px;
+    }
+
+    .header__content p {
+      margin-top: 1em;
+      margin-bottom: 3em;
+    }
+
+    .learn-more {
+      display: inline-block;
+      background-color: #26d6d6;
+      color: black;
+      border-radius: 100px;
+      padding: 0.75em 1.75em;
+      font-weight: 700;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    h1 {
+      font-weight: bold;
+      font-size: 2.5rem;
+    }
+  </style>
+</html>

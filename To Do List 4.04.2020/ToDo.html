@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Letter Counter</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Condensed:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    /* font-family: 'Anton', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif; */
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fd4244;
+      font-family: "Roboto Condensed", sans-serif;
+    }
+
+    h1 {
+      font-family: "Anton", sans-serif;
+      line-height: 100%;
+      font-size: 60px;
+      margin-bottom: 5%;
+    }
+
+    #uno {
+      text-align: center;
+      margin: 5% auto;
+      width: 50%;
+    }
+
+    #duo {
+      margin: 0 auto;
+      width: 450px;
+    }
+
+    p {
+      color: black;
+      background-color: white;
+      border: 3px solid black;
+      border-right: none;
+
+      float: left;
+      text-align: left;
+      width: 350px;
+      height: 45px;
+
+      margin-bottom: 15px;
+      padding-left: 5px;
+    }
+
+    input {
+      border: 3px solid black;
+      border-right: none;
+
+      width: 350px;
+      height: 45px;
+
+      font-weight: 700;
+      padding-left: 5px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      border: none;
+      background-color: black;
+      color: white;
+      border: 3px solid black;
+
+      width: 100px;
+      height: 45px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+
+      margin-bottom: 15px;
+    }
+
+    .todo_button {
+      float: right;
+      background-color: #e43b3e;
+    }
+
+    .todo_p {
+      overflow-y: hidden;
+      overflow-x: scroll;
+    }
+  </style>
+
+  <body>
+    <div id="uno">
+      <h1>TO DO LIST</h1>
+      <div id="duo">
+        <input type="text" value="" autofocus /><button>ADD ITEM</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var licznik = 0;
+
+    document.querySelector("button").onclick = function () {
+      var text = document.querySelector("input").value;
+      var length = document.querySelector("input").value.length;
+      document.querySelector("input").focus();
+      if (length > 0) {
+        var p = document.createElement("p");
+        var btn = document.createElement("button");
+        licznik++;
+
+        btn.innerHTML = "REMOVE";
+        btn.classList.add("todo_button");
+        btn.setAttribute("id", "todo_" + licznik);
+        btn.addEventListener("click", usun);
+
+        p.innerHTML = text;
+        p.classList.add("todo_p");
+        p.setAttribute("id", "todo_" + licznik);
+
+        document.getElementById("duo").appendChild(p);
+        document.getElementById("duo").appendChild(btn);
+
+        document.querySelector("input").value = "";
+      }
+    };
+
+    function usun() {
+      var id = this.getAttribute("id");
+      document.getElementById(id).remove();
+      this.remove();
+    }
+  </script>
+</html>

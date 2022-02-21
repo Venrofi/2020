@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Counter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Condensed:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    /* font-family: 'Anton', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif; */
+    * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #FD4244;
+        font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    h1 {
+        font-family: 'Anton', sans-serif;
+        line-height: 100%;
+        font-size: 60px;
+        margin-bottom: 2%;
+    }
+
+    #uno {
+        text-align: center;
+        margin: 5% auto;
+        width: 50%;
+    }
+
+    #duo {
+        width: min-content;
+        margin: 0 auto;
+    }
+
+    p {
+        text-align: left;
+        margin-top: 5px;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    input {
+        border: none;
+        font-weight: 700;
+
+    }
+</style>
+
+<body>
+    <div id="uno">
+        <h1>LETTER COUNTER</h1>
+        <div id="duo">
+            <input type="text" autofocus>
+            <p>Letter count: <span>0</span></p>
+        </div>
+    </div>
+</body>
+<script>
+    document.querySelector("input").onkeyup = function () {
+        document.querySelector("span").innerHTML = this.value.length;
+    }
+</script>
+
+</html>
