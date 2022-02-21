@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2:400,600&display=swap&subset=latin-ext"
+      rel="stylesheet"
+    />
+    <title>Timer</title>
+    <link rel="shortcut icon" href="myIcon.ico" type="image/x-icon" />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    :root {
+      --szary: #d8ddef;
+      --ciemny_szary: #a0a4b8;
+      --zielony_1: #21d19f;
+      --zielony_2: #45b69c;
+      --zielony_3: #7293a0;
+    }
+
+    body {
+      background: linear-gradient(180deg, black, var(--zielony_3));
+      background-repeat: no-repeat;
+      font-family: "Baloo Thambi 2", cursive;
+      text-align: center;
+      color: black;
+    }
+
+    .main {
+      background: none;
+      color: var(--szary);
+      width: 50%;
+      height: 230px;
+      border-radius: 0 0 20px 20px;
+      margin: 0 auto;
+      opacity: 1;
+    }
+
+    /* Progress bar*/
+    .progress_bar {
+      margin-top: 1%;
+    }
+
+    progress {
+      border-radius: 5px;
+    }
+
+    progress[value] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border: none;
+
+      width: 40%;
+      height: 50px;
+    }
+
+    progress[value]::-webkit-progress-value {
+      background-image: -webkit-linear-gradient(left, #190a05, #870000);
+      background-size: 100% 100%;
+    }
+
+    progress[value]::-moz-progress-bar {
+      background-image: -moz-linear-gradient(left, #190a05, #870000);
+      background-size: 100% 100%;
+      border-radius: 4px;
+    }
+
+    /* Ile godzin */
+    input:focus {
+      outline: none;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #liczba_godzin {
+      width: 10%;
+      margin-bottom: 1%;
+      text-align: center;
+      background-color: black;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--szary);
+    }
+
+    #odliczanie {
+      font-family: "Baloo Thambi 2", cursive;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    /* Przyciski */
+    .baton {
+      padding: 15px;
+      width: 15%;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    #start {
+      background-color: #3ca55c;
+    }
+
+    #start:hover {
+      background-color: #348f50;
+    }
+
+    #stop {
+      background-color: #a73737;
+    }
+
+    #stop:hover {
+      background-color: #7a2828;
+    }
+
+    #reset {
+      background-color: #4b6cb7;
+    }
+
+    #reset:hover {
+      background-color: #00467f;
+    }
+
+    /* Youtube */
+    iframe {
+      border-radius: 20px;
+      margin-top: 1%;
+      box-shadow: 0px 0px 8px 2px;
+    }
+
+    @media (max-width: 800px) {
+      .baton {
+        width: 30%;
+      }
+
+      progress[value] {
+        width: 80%;
+      }
+
+      iframe {
+        width: 70%;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="main">
+      <div class="ile">
+        <h1>Ile godzin?</h1>
+        <input
+          type="number"
+          id="liczba_godzin"
+          min="1"
+          max="8"
+          value="2"
+          autofocus
+        />
+      </div>
+      <div class="buttons">
+        <button id="start" class="baton" onclick="start()">START</button>
+        <button id="stop" class="baton" onclick="stop()">STOP</button>
+        <button id="reset" class="baton" onclick="reset()">RESET</button>
+      </div>
+      <div class="progress_bar">
+        <progress max="100" value="0" id="progress"></progress>
+      </div>
+      <div class="time">
+        <p id="odliczanie"></p>
+      </div>
+    </div>
+    <iframe
+      width="50%"
+      height="350px"
+      src="https://www.youtube.com/embed/?listType=playlist&list=PLt7bG0K25iXi9KIt6P6yStMp9ObzXjApm"
+      frameborder="0"
+      allowfullscreen
+      controls="0"
+    ></iframe>
+  </body>
+
+  <script>
+    var paragrafik = document.getElementById("odliczanie");
+    var interwal;
+    var licznik_startu = 0;
+    var licznik_stopu = 0;
+    document.getElementById("stop").disabled = true;
+
+    var bar = document.getElementById("progress").value;
+    var x = 100 / (document.getElementById("liczba_godzin").value * 60);
+
+    var godzina = document.getElementById("liczba_godzin").value - 1;
+    var minuta = 59;
+    var sekunda = 59;
+
+    function start() {
+      if (licznik_startu == 0) {
+        if (godzina >= 0 && godzina < 8) {
+          var czas = odliczanie(godzina, minuta, sekunda);
+          licznik_startu = 1;
+          licznik_stopu = 0;
+          document.getElementById("stop").disabled = false;
+          document.getElementById("start").disabled = true;
+        }
+      }
+    }
+
+    function stop() {
+      if (licznik_stopu == 0) {
+        clearInterval(interwal);
+        licznik_startu = 0;
+        licznik_stopu = 1;
+        document.getElementById("start").disabled = false;
+        document.getElementById("stop").disabled = true;
+      }
+    }
+
+    function reset() {
+      clearInterval(interwal);
+      paragrafik.innerHTML = "";
+      licznik_startu = 0;
+      licznik_stopu = 1;
+      document.getElementById("start").disabled = false;
+
+      godzina = document.getElementById("liczba_godzin").value - 1;
+      x = 100 / (document.getElementById("liczba_godzin").value * 60);
+
+      bar = 0;
+      document.getElementById("progress").value = bar;
+
+      minuta = 59;
+      sekunda = 59;
+    }
+
+    function odliczanie(godzina_, minuta_, sekunda_) {
+      interwal = setInterval(function() {
+        sekunda_ = sekunda_ < 10 ? "0" + sekunda_ : sekunda_;
+
+        paragrafik.innerHTML = godzina_ + " : " + minuta_ + " : " + sekunda_;
+        sekunda_--;
+
+        if (sekunda_ == 00) {
+          if (minuta_ > 0) {
+            minuta_--;
+            sekunda_ = 59;
+            minuta_ = minuta_ < 10 ? "0" + minuta_ : minuta_;
+            bar += x;
+            document.getElementById("progress").value = bar;
+          }
+
+          if (minuta_ == 00) {
+            if (godzina_ > 0) {
+              godzina_--;
+              minuta_ = 59;
+              sekunda_ = 59;
+            }
+            if (godzina_ == 00 && minuta_ == 00 && sekunda_ == 00) {
+              document.getElementById("progress").value = 100;
+              paragrafik.innerHTML = "0 : 00 : 00";
+              clearInterval(interwal);
+              alert("KONIEC!");
+            }
+          }
+        }
+        godzina = godzina_;
+        minuta = minuta_;
+        sekunda = sekunda_;
+      }, 1000);
+    }
+  </script>
+</html>
